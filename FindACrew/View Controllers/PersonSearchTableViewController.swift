@@ -12,7 +12,7 @@ class PersonSearchTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let leia = Person(name: "Leia Organa", birthYear: "19BBY", height: "150")
+    var people: [Person] = [Person(name: "Leia Organa", birthYear: "19BBY", height: "145"), Person(name: "Han Solo", birthYear: "32BBY", height: "175")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,17 @@ class PersonSearchTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return people.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.reuseIdentifier, for: indexPath) as! PersonTableViewCell
 
         // Configure the cell...
-        cell.nameLabel.text = leia.name
-        cell.heightLabel.text = "\(leia.height) cm"
-        cell.birthYearLabel.text = "Born \(leia.birthYear)"
+        let person = people[indexPath.row]
+        cell.nameLabel.text = person.name
+        cell.heightLabel.text = "\(person.height) cm"
+        cell.birthYearLabel.text = "Born \(person.birthYear)"
         return cell
     }
 }
